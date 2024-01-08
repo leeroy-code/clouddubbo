@@ -10,6 +10,8 @@ spring:
 dubbo:
   application:
     name: ${spring.application.name}
+# 控制注册的纬度是接口级还是实力级，默认是all， 都注册
+    register-mode: instance
   registry:
     address: nacos://127.0.0.1:8848
   protocol:
