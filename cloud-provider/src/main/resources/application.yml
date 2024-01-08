@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: cloud-provider
+  cloud:
+    nacos:
+      server-addr: 172.21.164.164:8848
+dubbo:
+  application:
+    name: ${spring.application.name}
+  registry:
+    address: nacos://172.21.164.164:8848
+  protocol:
+    name: dubbo
+    port: -1
+logging:
+  level:
+    root: info
