@@ -1,0 +1,25 @@
+server:
+  #服务端口
+  port: 8081
+spring:
+  application:
+    name: hello-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        register-enabled: false
+    gateway:
+      routes:
+        - id: cloud-consumer
+          # 匹配成功后，会被转发到8082端口，至于端口后面的path，会直接使用原始请求的
+          # 例如http://127.0.0.1:8081/hello/str，会被转发到http://127.0.0.1:8082/hello/str
+          uri: lb://cloud-consumer
+          predicates:
+            # 根据请求路径中带有"/hello/"，就算匹配成功
+            - Path=/hello/**
+    sentinel:
+      filter:
+        enabled: false
+      transport:
+        dashboard: 127.0.0.1:8080
